@@ -16,7 +16,7 @@ export const users = pgTable("users", {
     email: text("email").notNull().unique(),
     name: text("name"),
     plan: planEnum("plan").default("free").notNull(),
-    stripeCustomerId: text("strip_subscription_id").unique(),
+    stripeCustomerId: text("stripe_subscription_id").unique(),
     stripeSubscriptionId: text("stripe_subscription_id"),
     createdAt: timestamp("created_at").defaultNow().notNull(),
 });
@@ -40,7 +40,7 @@ export const options = pgTable("options", {
         .notNull()
         .references(() => polls.id, { onDelete: "cascade" }),
     text: text("text").notNull(),
-    order: integer("order").default(0).notNull(),
+    order: integer("order_index").default(0).notNull(),
 });
 
 // -----Votes ----------------------------
@@ -63,7 +63,7 @@ export type User = typeof users.$inferSelect;
 export type NewUser = typeof users.$inferInsert;
 export type Poll = typeof polls.$inferSelect;
 export type NewPoll = typeof polls.$inferInsert;
-export type Option = typeof polls.$inferSelect;
+export type Option = typeof options.$inferSelect;
 export type NewOption = typeof options.$inferInsert;
 export type Vote = typeof votes.$inferSelect;
 export type NewVote = typeof votes.$inferInsert;
