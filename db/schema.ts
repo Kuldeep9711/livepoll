@@ -16,7 +16,7 @@ export const users = pgTable("users", {
     email: text("email").notNull().unique(),
     name: text("name"),
     plan: planEnum("plan").default("free").notNull(),
-    stripeCustomerId: text("stripe_subscription_id").unique(),
+    stripeCustomerId: text("stripe_customer_id").unique(),
     stripeSubscriptionId: text("stripe_subscription_id"),
     createdAt: timestamp("created_at").defaultNow().notNull(),
 });
